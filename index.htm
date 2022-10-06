@@ -86,7 +86,8 @@
               "crossStreet": "at 15th St NW",
               "postalCode": feature["BusAddress"].substr(feature["BusAddress"].length - 5),
               "state": feature["StateCode"],
-              "stateName": feature["StateName"].trim()
+              "stateName": feature["StateName"].trim(),
+              "url" : feature["FactSheetPrintURL"]
             }
           }
         )
@@ -418,7 +419,7 @@
       const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
-          `<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4>`
+          `<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h4>${currentFeature.properties.url}</h4>`
         )
         .addTo(map);
     }
