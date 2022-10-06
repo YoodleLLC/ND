@@ -419,7 +419,7 @@
       const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
-          `<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4><h4>${currentFeature.properties.url}</h4>`
+          `<h3>${currentFeature.properties.name}</h3><p>${currentFeature.properties.address}</p><p>${currentFeature.properties.url}</p>`
         )
         .addTo(map);
     }
