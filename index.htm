@@ -366,6 +366,7 @@
         const details = listing.appendChild(document.createElement('div'));
         details.innerHTML = `${store.properties.address}` + `<br/>`;
         /*details.innerHTML = `${store.properties.address}` + `${store.properties.postalCode}`+`<br/>`;*/
+        details.innerHTML = `<a href="https://${store.properties.url}" target="_blank">${store.properties.url}</a>` + `<br/>`;
         if (store.properties.phone) {
           details.innerHTML += `${store.properties.phoneFormatted}`;
         }
