@@ -63,7 +63,6 @@
 
 
 
-
     loadJSON(function (response) {
 
       storesJSON = JSON.parse(response);
@@ -87,7 +86,8 @@
               "crossStreet": "at 15th St NW",
               "postalCode": feature["BusAddress"].substr(feature["BusAddress"].length - 5),
               "state": feature["StateCode"],
-              "stateName": feature["StateName"].trim()
+              "stateName": feature["StateName"].trim(),
+              "url" : feature["BusWebsite"]
             }
           }
         )
@@ -202,7 +202,8 @@
           });
 
           if (event.result.place_type && event.result.place_type.includes("region")) {
-            const region = event.result.text_en
+            console.log('event.result', event.result);
+            const region = event.result.text
             console.log('region', region);
 
             const filtered = stores.features
@@ -363,8 +364,11 @@
 
         /* Add details to the individual listing. */
         const details = listing.appendChild(document.createElement('div'));
-        details.innerHTML = `${store.properties.address}` + `<br/>`;
-        /*details.innerHTML = `${store.properties.address}` + `${store.properties.postalCode}`+`<br/>`;*/
+        details.innerHTML = `${store.properties.address}` + `<br/>` + 
+          `<a href="https://${store.properties.url}" target="_blank">${store.properties.url}</a>` + 
+          `<br/>`;
+        /*details.innerHTML = `${store.properties.address}` + `${store.properties.postalCode}`+`<br/>`;
+        details.innerHTML = `<a href="https://${store.properties.url}" target="_blank">${store.properties.url}</a>` + `<br/>`;*/
         if (store.properties.phone) {
           details.innerHTML += `${store.properties.phoneFormatted}`;
         }
@@ -418,7 +422,7 @@
       const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
-          `<h3>${currentFeature.properties.name}</h3><h4>${currentFeature.properties.address}</h4>`
+          `<h3>${currentFeature.properties.name}</h3><p>${currentFeature.properties.address}</p><a href="https://${currentFeature.properties.url}" target="_blank">${currentFeature.properties.url}</a>`
         )
         .addTo(map);
     }
