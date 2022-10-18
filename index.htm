@@ -22,10 +22,10 @@
   <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <style>
     /* allow scroll zoom to work when cursor over popup */
-    if(.mapboxgl-popup,
-    .mapboxgl-popup-content) {
+    .mapboxgl-popup,
+    .mapboxgl-popup-content {
       pointer-events: none;
-    }else{pointer-events: all;}
+    }
 
     /* re-enable X close button to accept pointer events */
     .mapboxgl-popup-close-button {
@@ -434,7 +434,7 @@
       const popup = new mapboxgl.Popup({ closeOnClick: false })
         .setLngLat(currentFeature.geometry.coordinates)
         .setHTML(
-          `<h3>${currentFeature.properties.name}</h3><p>${currentFeature.properties.address}</p><a href="https://${currentFeature.properties.url}" target="_blank">${currentFeature.properties.url}</a>`
+          `<h3>${currentFeature.properties.name}</h3><p>${currentFeature.properties.address}</p><a href="https://${currentFeature.properties.url}" style="pointer-events:auto;" target="_blank">${currentFeature.properties.url}</a>`
         )
         .addTo(map);
     }
